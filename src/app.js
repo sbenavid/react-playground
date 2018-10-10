@@ -1,6 +1,6 @@
 console.log('App.js esta corriendo');
 
-var app = {
+const app = {
   title: 'Ejemplo',
   subtitle: 'con JSX',
   options: ['uno', 'dos']
@@ -8,7 +8,7 @@ var app = {
 
 // JSX - Javascript XML
 // jsx expresions deven estar encapsuladas en <div>
-var template = (
+const template = (
   <div>
     <h1>{app.title}</h1>
     {app.subtitle && <p>{app.subtitle}</p>}
@@ -28,13 +28,13 @@ function getLocation(lugar) {
 }
 
 // tambien se puede referenciar con un objeto
-var user = {
+const user = {
   name: 'Andrew',
   age: 22,
   location: 'CDMX'
 };
   // cualquier cosa entre "{}" puede ser una Javascript expression
-var template2 = (
+const template2 = (
   <div>
     <h1>{user.name ? user.name : 'Anonymous'}</h1>
     {user.age && user.age >=18 && <p>Age: {user.age}</p>}
@@ -42,7 +42,7 @@ var template2 = (
   </div>
 );
 
-var appRoot = document.getElementById('app');
+const appRoot = document.getElementById('app');
 
 // toma 2 artumentos, el template y el elemento donde se va a dibujar
 ReactDOM.render(template, appRoot);
