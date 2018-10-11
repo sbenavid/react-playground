@@ -30,30 +30,36 @@ function getLocation(lugar) {
 let count = 0;
 const someId = 'myId';
 const addOne = () => {
-  console.log('addOne')
+  count ++;
+  renderCounterApp();
 };
 
 const minusOne = () => {
-  console.log('minusOne');
+  count --;
+  renderCounterApp();
 };
 
 const reset = () => {
-  console.log('reset');
+  count = 0;
+  renderCounterApp();
 };
-
-// cualquier cosa entre "{}" puede ser una Javascript expression
-// class -> className
-const template2 = (
-  <div>
-    <h1>Count: {count}</h1>
-    <button id={someId} onClick={addOne} className="button">+1</button>
-    <button onClick={minusOne} className="button">-1</button>
-    <button onClick={reset} className="button">reset</button>
-  </div>
-);
-
 
 const appRoot = document.getElementById('app');
 
-// toma 2 artumentos, el template y el elemento donde se va a dibujar
-ReactDOM.render(template2, appRoot);
+const renderCounterApp = () => {
+  // cualquier cosa entre "{}" puede ser una Javascript expression
+  // class -> className
+  const template2 = (
+    <div>
+      <h1>Count: {count}</h1>
+      <button id={someId} onClick={addOne} className="button">+1</button>
+      <button onClick={minusOne} className="button">-1</button>
+      <button onClick={reset} className="button">reset</button>
+    </div>
+  );
+
+  // toma 2 artumentos, el template y el elemento donde se va a dibujar
+  ReactDOM.render(template2, appRoot);
+};
+
+renderCounterApp();
