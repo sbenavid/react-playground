@@ -46,13 +46,15 @@ class Action extends React.Component {
   }
 }
 
-//Boton para quitar todas las opciones
-
-
 // lista de opciones disponibles
 class Options extends React.Component {
+  constructor (props) {
+    super(props);   // para mantener la  funcionalidad original
+    this.handleRemoveAll = this.handleRemoveAll.bind(this);
+  }
   handleRemoveAll() {
-    alert('handle remove all');
+    //alert('handle remove all');
+    console.log(this.props.arreglo);
   }
   render() {
     return (
