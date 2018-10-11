@@ -1,3 +1,17 @@
+// nesting components
+class IndecisionApp extends React.Component {
+  render() {
+    return (
+      <div>
+        <Header />
+        <Action />
+        <Options />
+        <AddOption />
+      </div>
+    );
+  }
+}
+
 // React obligatoriamente pide primer letra en mayusculas
 class Header extends React.Component {
   // react components require render
@@ -27,7 +41,19 @@ class Options extends React.Component {
   render() {
     return (
       <div>
-        <p>jaja</p>
+        <OptionComponent />
+        <OptionComponent />
+      </div>
+    )
+  }
+}
+
+// una sola opcione
+class OptionComponent extends React.Component {
+  render() {
+    return (
+      <div>
+        <p>Mi texto</p>
       </div>
     )
   }
@@ -44,13 +70,4 @@ class AddOption extends React.Component {
   }
 }
 
-const jsx = (
-  <div>
-    <Header />
-    <Action />
-    <Options />
-    <AddOption />
-  </div>
-);
-
-ReactDOM.render(jsx, document.getElementById('app'));
+ReactDOM.render(<IndecisionApp />, document.getElementById('app'));
