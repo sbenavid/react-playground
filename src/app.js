@@ -1,11 +1,15 @@
 // nesting components
 class IndecisionApp extends React.Component {
   render() {
+    const title='Mi ejemplo';
+    const subtitle = 'A ver que te toca hacer';
+    const options = ['la primera', 'la segunda', 'esta es la tercera'];
+
     return (
       <div>
-        <Header />
+        <Header title={title} subtitle={subtitle}/>
         <Action />
-        <Options />
+        <Options arreglo={options}/>
         <AddOption />
       </div>
     );
@@ -13,13 +17,15 @@ class IndecisionApp extends React.Component {
 }
 
 // React obligatoriamente pide primer letra en mayusculas
+// paso de data entre componentes a traves de props. Obtengo
+// el atributo desde la invocacion <Header title="ejemplo" />
 class Header extends React.Component {
   // react components require render
   render() {
     return (
       <div>
-        <h1>Indecision</h1>
-        <h2>Vamos a ver</h2>
+        <h1>{this.props.title}</h1>
+        <h2>{this.props.subtitle}</h2>
       </div>
     );
   }
@@ -41,7 +47,10 @@ class Options extends React.Component {
   render() {
     return (
       <div>
-        <OptionComponent />
+        {this.props.arreglo.length}
+        {
+          this.props.arreglo.map((opcion) => <OptionComponent key={opcion} optionText={opcion} />)
+        }
         <OptionComponent />
       </div>
     )
@@ -50,10 +59,11 @@ class Options extends React.Component {
 
 // una sola opcione
 class OptionComponent extends React.Component {
+
   render() {
     return (
       <div>
-        <p>Mi texto</p>
+        {this.props.optionText}
       </div>
     )
   }
