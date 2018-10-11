@@ -27,22 +27,33 @@ function getLocation(lugar) {
   }
 }
 
-// tambien se puede referenciar con un objeto
-const user = {
-  name: 'Andrew',
-  age: 22,
-  location: 'CDMX'
+let count = 0;
+const someId = 'myId';
+const addOne = () => {
+  console.log('addOne')
 };
-  // cualquier cosa entre "{}" puede ser una Javascript expression
+
+const minusOne = () => {
+  console.log('minusOne');
+};
+
+const reset = () => {
+  console.log('reset');
+};
+
+// cualquier cosa entre "{}" puede ser una Javascript expression
+// class -> className
 const template2 = (
   <div>
-    <h1>{user.name ? user.name : 'Anonymous'}</h1>
-    {user.age && user.age >=18 && <p>Age: {user.age}</p>}
-    {getLocation(user.location)}
+    <h1>Count: {count}</h1>
+    <button id={someId} onClick={addOne} className="button">+1</button>
+    <button onClick={minusOne} className="button">-1</button>
+    <button onClick={reset} className="button">reset</button>
   </div>
 );
+
 
 const appRoot = document.getElementById('app');
 
 // toma 2 artumentos, el template y el elemento donde se va a dibujar
-ReactDOM.render(template, appRoot);
+ReactDOM.render(template2, appRoot);
