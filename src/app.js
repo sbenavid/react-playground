@@ -3,63 +3,53 @@ console.log('App.js esta corriendo');
 const app = {
   title: 'Ejemplo',
   subtitle: 'con JSX',
-  options: ['uno', 'dos']
+  options: []
 }
 
-// JSX - Javascript XML
-// jsx expresions deven estar encapsuladas en <div>
-const template = (
-  <div>
-    <h1>{app.title}</h1>
-    {app.subtitle && <p>{app.subtitle}</p>}
-    <p>{app.options.length > 0 ? 'aqui tus opciones ' : 'no hay opciones'}</p>
-    <ol>
-      <li>primero</li>
-      <li>segundo</li>
-    </ol>
-  </div>
-);
-
-// metodo local
-function getLocation(lugar) {
-  if (lugar) {
-    return <p>Location:{lugar}</p>;
+const onFormSubmit = (e) => {
+  e.preventDefault();
+  // obtener el valor que el usuario llenó en la forma
+  const option = e.target.elements.option.value;
+  if (option) {
+    // agrega al arreglo
+    app.options.push(option);
+    console.log('onFormSubmit', option);
+    // limpia input type
+    e.target.elements.option.value = '';
   }
-}
-
-let count = 0;
-const someId = 'myId';
-const addOne = () => {
-  count ++;
-  renderCounterApp();
+  render();
 };
 
-const minusOne = () => {
-  count --;
-  renderCounterApp();
-};
-
-const reset = () => {
-  count = 0;
-  renderCounterApp();
+// remove all button
+// on click borrar todas las opciones.
+const onResetButton = (e) => {
+  app.options = [];
+  render();
 };
 
 const appRoot = document.getElementById('app');
 
-const renderCounterApp = () => {
-  // cualquier cosa entre "{}" puede ser una Javascript expression
-  // class -> className
-  const template2 = (
+const render = () => {
+  // JSX - Javascript XML
+  // jsx expresions deven estar encapsuladas en <div>
+  const template = (
     <div>
-      <h1>Count: {count}</h1>
-      <button id={someId} onClick={addOne} className="button">+1</button>
-      <button onClick={minusOne} className="button">-1</button>
-      <button onClick={reset} className="button">reset</button>
+      <h1>{app.title}</h1>
+      {app.subtitle && <p>{app.subtitle}</p>}
+      <p>{app.options.length > 0 ? 'aqui tus opciones ' : 'no hay opciones'}</p>
+      <p>{app.options.length}</p>
+      <button onClick={onResetButton}>Reset</button>
+      <ol>
+        <li>primero</li>
+        <li>segundo</li>
+      </ol>
+      <form onSubmit={onFormSubmit}>
+        <input type="text" name="option"/>
+        <button>Add option</button>
+      </form>
     </div>
   );
-
-  // toma 2 artumentos, el template y el elemento donde se va a dibujar
-  ReactDOM.render(template2, appRoot);
+  ReactDOM.render(template, appRoot);
 };
 
-renderCounterApp();
+render();
