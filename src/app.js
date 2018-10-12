@@ -1,15 +1,41 @@
 // nesting components
 class IndecisionApp extends React.Component {
+  constructor(props) {
+    super(props);
+    this.handleDeleteOptions = this.handleDeleteOptions.bind(this);
+    this.handlePick = this.handlePick.bind(this);
+    this.state = {
+      options: ['la primera', 'segunda', 'esta es la tercera']
+    }
+  }
+  // handle delete Options
+  handleDeleteOptions() {
+    this.setState(() => {
+      return {
+        options: []
+      }
+    })
+  }
+  handlePick() {
+    const randomNum = Math.floor(Math.random() * this.state.options.length);
+    const option = this.state.options[randomNum];
+    alert(option);
+  }
   render() {
     const title='Mi ejemplo';
     const subtitle = 'A ver que te toca hacer';
-    const options = ['la primera', 'la segunda', 'esta es la tercera'];
 
     return (
       <div>
         <Header title={title} subtitle={subtitle}/>
-        <Action />
-        <Options arreglo={options}/>
+        <Action
+          hasOptions={this.state.options.length > 0}
+          handlePick={this.handlePick}
+        />
+        <Options
+          options={this.state.options}
+          handleDeleteOptions={this.handleDeleteOptions}
+        />
         <AddOption />
       </div>
     );
@@ -33,14 +59,15 @@ class Header extends React.Component {
 
 // otra clase
 class Action extends React.Component {
-  // manejo de eventos con este metodo
-  handlePick() {
-    alert('handlePick');
-  }
   render() {
     return (
       <div>
-        <button onClick={this.handlePick}>Que debo hacer?</button>
+        <button
+          onClick={this.props.handlePick}
+          disabled={!this.props.hasOptions}
+        >
+          Que debo hacer?
+        </button>
       </div>
     );
   }
@@ -48,21 +75,13 @@ class Action extends React.Component {
 
 // lista de opciones disponibles
 class Options extends React.Component {
-  constructor (props) {
-    super(props);   // para mantener la  funcionalidad original
-    this.handleRemoveAll = this.handleRemoveAll.bind(this);
-  }
-  handleRemoveAll() {
-    //alert('handle remove all');
-    console.log(this.props.arreglo);
-  }
   render() {
     return (
       <div>
-        <button onClick={this.handleRemoveAll}>Quitar todos</button>
-        {this.props.arreglo.length}
+        <button onClick={this.props.handleDeleteOptions}>Quitar todos</button>
+        {this.props.options.length}
         {
-          this.props.arreglo.map((opcion) => <OptionComponent key={opcion} optionText={opcion} />)
+          this.props.options.map((opcion) => <OptionComponent key={opcion} optionText={opcion} />)
         }
         <OptionComponent />
       </div>
@@ -70,7 +89,7 @@ class Options extends React.Component {
   }
 }
 
-// una sola opcione
+// una sola opcion
 class OptionComponent extends React.Component {
 
   render() {
