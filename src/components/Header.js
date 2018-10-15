@@ -12,7 +12,7 @@ const Header = (props) => {
 
 // Valores default para el Header
 Header.defaultProps = {
-  title: 'App basica random'
+  title: 'App basica que usa random'
 };
 
 // usar este mecanismo cuando no es una clase

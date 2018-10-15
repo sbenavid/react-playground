@@ -9,7 +9,7 @@ export default class AddOption extends React.Component {
       error: undefined
     };
   }
-  // local methos
+  // local methods
   handleAddOption(e) {
     e.preventDefault();
 
