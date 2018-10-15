@@ -10,6 +10,18 @@ class IndecisionApp extends React.Component {
       options: props.options
     };
   }
+  // metodo principal que se llama al montar
+  componentDidMount() {
+    console.log('Fetching data');
+  }
+  // otro metod principal. Como argumentos recibe los estatus previos
+  componentDidUpdate(prevProps, prevState) {
+    console.log('saving data');
+  }
+  // cuando se desaparece el componente
+  componentWillUnmount() {
+    console.log('componente quitado');
+  }
   // handle delete Options
   handleDeleteOptions() {
     this.setState(() => ({ options: [] }));
