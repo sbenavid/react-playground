@@ -6,15 +6,38 @@ import Header from './Header';
 import Options from './Options';
 
 export default class IndecisionApp extends React.Component {
-  constructor(props) {
-    super(props);
-    this.handleDeleteOptions = this.handleDeleteOptions.bind(this);
-    this.handlePick = this.handlePick.bind(this);
-    this.handleAddOption = this.handleAddOption.bind(this);
-    this.handleDeleteOption = this.handleDeleteOption.bind(this);
-    this.state = {
-      options: []
-    };
+  state = {
+    options: []
+  };
+  // handle delete Options
+  handleDeleteOptions = () => {
+    this.setState(() => ({ options: [] }));
+  }
+  // eliminar una opcion individual
+  handleDeleteOption = (optionToRemove) => {
+    this.setState((prevState) => ({
+      options: prevState.options.filter((option) => optionToRemove !== option)
+    }));
+  }
+  // seleccionar una opcion aleatoriamente
+  handlePick = () => {
+    const randomNum = Math.floor(Math.random() * this.state.options.length);
+    const option = this.state.options[randomNum];
+    alert(option);
+  }
+  // agregar una nueva opcion
+  handleAddOption = (option) => {
+    // validar que no este vacio el string "option"
+    if (!option) {
+      return 'No dejar la opcion vacia';
+    } else if (this.state.options.indexOf(option) > -1 ) {
+      // ya se registro ese texto, no aceptar repetidos
+      return 'Esta opcion ya fue escrita!';
+    }
+
+    this.setState((prevState) => ({
+      options: prevState.options.concat(option)
+    }));
   }
   // metodo principal que se llama al montar
   componentDidMount() {
@@ -45,38 +68,8 @@ export default class IndecisionApp extends React.Component {
   componentWillUnmount() {
     console.log('componente quitado');
   }
-  // handle delete Options
-  handleDeleteOptions() {
-    this.setState(() => ({ options: [] }));
-  }
-  // eliminar una opcion individual
-  handleDeleteOption(optionToRemove) {
-    this.setState((prevState) => ({
-      options: prevState.options.filter((option) => optionToRemove !== option)
-    }));
-  }
-  // seleccionar una opcion aleatoriamente
-  handlePick() {
-    const randomNum = Math.floor(Math.random() * this.state.options.length);
-    const option = this.state.options[randomNum];
-    alert(option);
-  }
-  // agregar una nueva opcion
-  handleAddOption(option) {
-    // validar que no este vacio el string "option"
-    if (!option) {
-      return 'No dejar la opcion vacia';
-    } else if (this.state.options.indexOf(option) > -1 ) {
-      // ya se registro ese texto, no aceptar repetidos
-      return 'Esta opcion ya fue escrita!';
-    }
 
-    this.setState((prevState) => ({
-      options: prevState.options.concat(option)
-    }));
-
-  }
-  render() {
+    render() {
     const subtitle = 'A ver que te toca hacer';
 
     return (
