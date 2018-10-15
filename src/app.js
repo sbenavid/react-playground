@@ -12,11 +12,28 @@ class IndecisionApp extends React.Component {
   }
   // metodo principal que se llama al montar
   componentDidMount() {
-    console.log('Fetching data');
+    // validacion de formato correcto
+    try {
+      const json = localStorage.getItem('opciones');
+      const options = JSON.parse(json);
+
+      if (options) {
+        this.setState(() => ({ options }));
+      }
+    } catch(e) {
+      // no es necesario hacer nada en caso de error.
+    }
   }
   // otro metod principal. Como argumentos recibe los estatus previos
   componentDidUpdate(prevProps, prevState) {
-    console.log('saving data');
+    // solamente guardar la data si el arreglo de opciones previo es diferente
+    // al actual
+    if (prevState.options.length !== this.state.options.length) {
+      // convierte el json a string
+      const json = JSON.stringify(this.state.options);
+      // lo guarda usando "localStorage"
+      localStorage.setItem('opciones',json)
+    }
   }
   // cuando se desaparece el componente
   componentWillUnmount() {
@@ -120,6 +137,7 @@ const Options = (props) => {
   return (
     <div>
       <button onClick={props.handleDeleteOptions}>Quitar todos</button>
+      {props.options.length === 0 && <p>Agregar una opcione para poder iniciar!</p>}
       {
         props.options.map((opcion) => (
           <OptionComponent
@@ -166,6 +184,11 @@ class AddOption extends React.Component {
     const error = this.props.handleAddOption(option);
 
     this.setState(() => ({ error }));
+
+    // limpiar cuadro de texto si hubo insert exitoso.
+    if (!error) {
+      e.target.elements.option.value = '';
+    }
   }
   render() {
     return (
