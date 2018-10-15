@@ -6,7 +6,7 @@ class IndecisionApp extends React.Component {
     this.handlePick = this.handlePick.bind(this);
     this.handleAddOption = this.handleAddOption.bind(this);
     this.state = {
-      options: []
+      options: props.options
     };
   }
   // handle delete Options
@@ -40,12 +40,11 @@ class IndecisionApp extends React.Component {
     });
   }
   render() {
-    const title='Mi ejemplo';
     const subtitle = 'A ver que te toca hacer';
 
     return (
       <div>
-        <Header title={title} subtitle={subtitle}/>
+        <Header subtitle={subtitle}/>
         <Action
           hasOptions={this.state.options.length > 0}
           handlePick={this.handlePick}
@@ -66,10 +65,21 @@ const Header = (props) => {
   return (
     <div>
       <h1>{props.title}</h1>
-      <h2>{props.subtitle}</h2>
+      {props.subtitle && <h2>props.subtitle</h2>}
     </div>
   );
-}
+};
+
+// Valores default para la app
+IndecisionApp.defaultProps = {
+  options: []
+};
+
+// Valores default para el Header
+Header.defaultProps = {
+  title: 'App basica random'
+};
+
 // React obligatoriamente pide primer letra en mayusculas
 // paso de data entre componentes a traves de props. Obtengo
 // el atributo desde la invocacion <Header title="ejemplo" />
@@ -87,7 +97,7 @@ const Action = (props) => {
       </button>
     </div>
   );
-}
+};
 
 
 // lista de opciones disponibles
@@ -102,7 +112,7 @@ const Options = (props) => {
       <OptionComponent />
     </div>
   );
-}
+};
 
 // manjea una opcion individual
 const OptionComponent = (props) => {
@@ -111,8 +121,7 @@ const OptionComponent = (props) => {
       {props.optionText}
     </div>
   );
-}
-
+};
 
 // agregar una nueva opcion
 class AddOption extends React.Component {
