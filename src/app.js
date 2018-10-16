@@ -2,6 +2,8 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 // app principal
 import IndecisionApp from './components/IndecisionApp';
+// estilos
+import './styles/styles.scss'
 
 // React obligatoriamente pide primer letra en mayusculas
 // paso de data entre componentes a traves de props. Obtengo
