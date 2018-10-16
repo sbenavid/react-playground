@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 // app principal
 import IndecisionApp from './components/IndecisionApp';
 // estilos
+import 'normalize.css/normalize.css'
 import './styles/styles.scss'
 
 // React obligatoriamente pide primer letra en mayusculas
