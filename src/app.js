@@ -17,11 +17,4 @@ const Layout = (props) => {
   );
 };
 
-ReactDOM.render((
-  <Layout>
-    <div>
-      <h1>mi pag</h1>
-      <p>Qué bonito!</p>
-    </div>
-  </Layout>
-  ), document.getElementById('app'));
+ReactDOM.render(<IndecisionApp />, document.getElementById('app'));

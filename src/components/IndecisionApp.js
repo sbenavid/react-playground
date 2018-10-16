@@ -4,10 +4,12 @@ import AddOption from './AddOption';
 import Action from './Action';
 import Header from './Header';
 import Options from './Options';
+import OptionModal from './OptionModal';
 
 export default class IndecisionApp extends React.Component {
   state = {
-    options: []
+    options: [],
+    selectedOption: undefined
   };
   // handle delete Options
   handleDeleteOptions = () => {
@@ -23,7 +25,9 @@ export default class IndecisionApp extends React.Component {
   handlePick = () => {
     const randomNum = Math.floor(Math.random() * this.state.options.length);
     const option = this.state.options[randomNum];
-    alert(option);
+    this.setState(() => ({
+      selectedOption: option
+    }));
   }
   // agregar una nueva opcion
   handleAddOption = (option) => {
@@ -34,10 +38,13 @@ export default class IndecisionApp extends React.Component {
       // ya se registro ese texto, no aceptar repetidos
       return 'Esta opcion ya fue escrita!';
     }
-
     this.setState((prevState) => ({
       options: prevState.options.concat(option)
     }));
+  }
+  // event handler para borrar el modal al hacer clic en el boton
+  handleClearSelectedOptions = () => {
+    this.setState(() => ({ selectedOption: undefined }));
   }
   // metodo principal que se llama al montar
   componentDidMount() {
@@ -86,6 +93,10 @@ export default class IndecisionApp extends React.Component {
         />
         <AddOption
           handleAddOption={this.handleAddOption}
+        />
+        <OptionModal
+          selectedOption={this.state.selectedOption}
+          handleClearSelectedOptions={this.handleClearSelectedOptions}
         />
       </div>
     );
