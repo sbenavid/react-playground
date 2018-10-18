@@ -1,0 +1,23 @@
+// Add option error
+.add-option-error {
+    color: $off-white;
+    margin: $medium-size 0 0 0;  // top, right, bottom, left
+    font-style: italic;
+    padding: 0;
+}
+
+// add option 
+.add-option {
+    display: flex;
+    padding: $medium-size;
+}
+
+// manejo del cuadro de texto para que crezca en auto
+.add-option__input {
+    background: $dark-blue;
+    border: none;
+    border-bottom: .3rem solid darken($dark-blue, 10%);
+    color: $off-white;
+    flex-grow: 1;
+    margin-right: $small-size;
+}

@@ -14,10 +14,13 @@ const Options = (props) => (
     </div>
     {props.options.length === 0 && <p className="widget__message">Agregar una opcione para poder iniciar!</p>}
     {
-      props.options.map((opcion) => (
+      // map regresa tambien el indice del arreglo, se usara este valor para mostrar 
+      // el contador de opciones.
+      props.options.map((opcion, index) => (
         <OptionComponent
           key={opcion}
           optionText={opcion}
+          count={index + 1}
           handleDeleteOption={props.handleDeleteOption}
         />
       ))
