@@ -9,6 +9,7 @@
 // add option 
 .add-option {
     display: flex;
+    flex-direction: column;
     padding: $medium-size;
 }
 
@@ -19,5 +20,28 @@
     border-bottom: .3rem solid darken($dark-blue, 10%);
     color: $off-white;
     flex-grow: 1;
-    margin-right: $small-size;
+    margin: 0 0 $small-size 0;
+    padding: $small-size;
+   // margin-right: $small-size;
 }
+
+
+// configuracion variable para pantallas mobiles, basado en un ancho min de 45rem
+// se cambia el acomodo de elementos hacia renglones (en vez de columnas)
+// se agrega un espaciado entre el inputtype y el boton de agregar opcion.
+@media (min-width: $desktop-breakpoint) {
+    .add-option {
+        flex-direction: row;
+    }
+    .add-option__input {
+        margin: 0 $small-size 0 0;
+    }
+}
+
+// estilo condicional para pantallas moviles.
+// cambia el color de letras en rojo para pantallas menores a 45rem
+// @media (max-width: 45rem) {
+//     * {
+//         color: red;
+//     }
+// }
