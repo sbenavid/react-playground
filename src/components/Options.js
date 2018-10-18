@@ -3,13 +3,16 @@ import OptionComponent from './OptionComponent';
 // lista de opciones disponibles
 const Options = (props) => (
   <div>
-    <button 
-      className="button button--link"
-      onClick={props.handleDeleteOptions}
-    >
-      Quitar todos
-    </button>
-    {props.options.length === 0 && <p>Agregar una opcione para poder iniciar!</p>}
+    <div className="widget-header">
+      <h3 className="widget-header__title">your options</h3>
+      <button 
+        className="button button--link"
+        onClick={props.handleDeleteOptions}
+      >
+        Quitar todos
+      </button>
+    </div>
+    {props.options.length === 0 && <p className="widget__message">Agregar una opcione para poder iniciar!</p>}
     {
       props.options.map((opcion) => (
         <OptionComponent
