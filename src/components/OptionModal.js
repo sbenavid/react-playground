@@ -6,10 +6,12 @@ const OptionModal = (props) => (
     isOpen={!!props.selectedOption}
     onRequestClose={props.handleClearSelectedOptions}
     contentLabel="Opcion Seleccionada"
+    closeTimeoutMS={200}
+    className="modal"
   >
-    <h3>Opcion Seleccionada</h3>
-    {props.selectedOption && <p>{props.selectedOption}</p>}
-    <button onClick={props.handleClearSelectedOptions}>ok</button>
+    <h3 className="modal__title">Opcion Seleccionada</h3>
+    {props.selectedOption && <p className="modal__body">{props.selectedOption}</p>}
+    <button className="button" onClick={props.handleClearSelectedOptions}>ok</button>
   </Modal>
 );
 
